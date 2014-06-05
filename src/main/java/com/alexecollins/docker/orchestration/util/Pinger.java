@@ -24,6 +24,8 @@ public final class Pinger {
 		try {
 			final HttpURLConnection c = (HttpURLConnection) uri.toURL().openConnection();
 			c.setRequestProperty("Accept", "*/*");
+            c.setConnectTimeout(500);
+            c.setReadTimeout(1000);
 			c.connect();
 			try {
 				return c.getResponseCode() == 200;
