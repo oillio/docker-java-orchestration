@@ -92,7 +92,7 @@ public class DockerOrchestratorUTest {
         when(repoMock.findContainer(idMock)).thenReturn(containerMock);
         when(containerMock.getId()).thenReturn(CONTAINER_ID);
         when(dockerMock.inspectContainer(CONTAINER_ID)).thenReturn(containerInspectResponseMock);
-        when(containerInspectResponseMock.getImage()).thenReturn(IMAGE_ID);
+        when(containerInspectResponseMock.getImageId()).thenReturn(IMAGE_ID);
         when(imageMock.getId()).thenReturn(IMAGE_ID);
 
         testObj.start();
@@ -108,7 +108,7 @@ public class DockerOrchestratorUTest {
         when(repoMock.findContainer(idMock)).thenReturn(containerMock);
         when(containerMock.getId()).thenReturn(CONTAINER_ID);
         when(dockerMock.inspectContainer(CONTAINER_ID)).thenReturn(containerInspectResponseMock);
-        when(containerInspectResponseMock.getImage()).thenReturn(IMAGE_ID);
+        when(containerInspectResponseMock.getImageId()).thenReturn(IMAGE_ID);
         when(imageMock.getId()).thenReturn(IMAGE_ID);
         when(dockerMock.listContainers(false)).thenReturn(Arrays.asList(containerMock));
 
@@ -125,7 +125,7 @@ public class DockerOrchestratorUTest {
         when(repoMock.findContainer(idMock)).thenReturn(containerMock);
         when(containerMock.getId()).thenReturn(CONTAINER_ID);
         when(dockerMock.inspectContainer(CONTAINER_ID)).thenReturn(containerInspectResponseMock);
-        when(containerInspectResponseMock.getImage()).thenReturn("A Different Image Id");
+        when(containerInspectResponseMock.getImageId()).thenReturn("A Different Image Id");
         when(imageMock.getId()).thenReturn(IMAGE_ID);
 
         testObj.start();

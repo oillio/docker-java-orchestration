@@ -234,7 +234,7 @@ public class DockerOrchestrator {
     private String lookupImageIdFromContainer(String containerId) {
         try {
             ContainerInspectResponse containerInspectResponse = docker.inspectContainer(containerId);
-            return containerInspectResponse.getImage();
+            return containerInspectResponse.getImageId();
         } catch (DockerException e) {
             LOGGER.error("Unable to inspect container " + containerId, e);
             throw new OrchestrationException(e);
