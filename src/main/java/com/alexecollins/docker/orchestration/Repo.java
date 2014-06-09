@@ -8,6 +8,8 @@ import com.kpelykh.docker.client.DockerClient;
 import com.kpelykh.docker.client.DockerException;
 import com.kpelykh.docker.client.model.Container;
 import com.kpelykh.docker.client.model.Image;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +19,7 @@ import static java.util.Arrays.asList;
 
 @SuppressWarnings("CanBeFinal")
 class Repo {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Repo.class);
 
 	private static ObjectMapper MAPPER = new ObjectMapper(new YAMLFactory());
 	private final DockerClient docker;
@@ -38,6 +41,10 @@ class Repo {
 		if (src.isDirectory()) {
 			for (File file : src.listFiles()) {
 				final File confFile = new File(file, "conf.yml");
+                if(!confFile.exists()) {
+                    LOGGER.info("conf.yml file does not exist.  Skipping: " + file.getName());
+                    continue;
+                }
                 try {
                     confs.put(new Id(file.getName()), confFile.length() > 0 ? MAPPER.readValue(confFile, Conf.class) : new Conf());
                 } catch (IOException e) {
